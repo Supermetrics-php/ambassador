@@ -1,0 +1,15 @@
+<?php
+
+namespace Supermetrics\Ambassador\Drivers;
+class RedisDriver implements Driver
+{
+    public function store()
+    {
+        // TODO: Implement store() method.
+    }
+
+    public function findById()
+    {
+        // TODO: Implement findById() method.
+    }
+}
