@@ -1,6 +1,6 @@
 <?php
 
-namespace Supermetrics\Ambassador\Returner;
+namespace Supermetrics\Ambassador\DataTransferObjects;
 
 use Supermetrics\Ambassador\Enums\StatusCodes;
 

@@ -1,7 +1,9 @@
 <?php
 
 namespace Supermetrics\Ambassador\Drivers;
-class RedisDriver implements Driver
+use Supermetrics\Ambassador\Contracts\DriverInterface;
+
+class RedisDriver implements DriverInterface
 {
     public function store()
     {

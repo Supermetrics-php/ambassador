@@ -1,7 +1,9 @@
 <?php
 
 namespace Supermetrics\Ambassador\Drivers;
-class MySqlDriver implements Driver
+use Supermetrics\Ambassador\Contracts\DriverInterface;
+
+class MySqlDriver implements DriverInterface
 {
     public function store()
     {

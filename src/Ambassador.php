@@ -2,12 +2,12 @@
 
 namespace Supermetrics\Ambassador;
 
-use Supermetrics\Ambassador\Drivers\Driver;
+use Supermetrics\Ambassador\Contracts\DriverInterface;
 use Supermetrics\Ambassador\Drivers\StorageBuilder;
 
 class Ambassador
 {
-	protected Driver $storageDriver;
+	protected DriverInterface $storageDriver;
 
     /**
      * @param $driver
@@ -27,6 +27,7 @@ class Ambassador
      */
     public function handle(array $payload): array
 	{
+        var_dump($this->storageDriver->findById());
 		return [];
 	}
 }

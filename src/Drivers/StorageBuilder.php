@@ -2,6 +2,8 @@
 
 namespace Supermetrics\Ambassador\Drivers;
 
+use Supermetrics\Ambassador\Contracts\DriverInterface;
+
 use Supermetrics\Ambassador\Enums\StorageDrivers;
 
 class StorageBuilder
@@ -22,7 +24,7 @@ class StorageBuilder
     {
     }
 
-    public static function getDriverInstance($driverName): Driver
+    public static function getDriverInstance(string $driverName): DriverInterface
     {
         if (self::$dbInstance === null) {
             self::$dbInstance = self::getDriver($driverName);
@@ -30,7 +32,7 @@ class StorageBuilder
 
         return self::$dbInstance;
     }
-    public static function getDriver(string $driverName): Driver
+    public static function getDriver(string $driverName): DriverInterface
     {
         return match ($driverName) {
             StorageDrivers::MYSQL->value => new MySqlDriver(),

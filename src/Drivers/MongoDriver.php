@@ -1,7 +1,9 @@
 <?php
 
 namespace Supermetrics\Ambassador\Drivers;
-class MongoDriver implements Driver
+use Supermetrics\Ambassador\Contracts\DriverInterface;
+
+class MongoDriver implements DriverInterface
 {
     public function store()
     {
