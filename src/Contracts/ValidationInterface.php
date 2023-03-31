@@ -4,5 +4,5 @@ namespace Supermetrics\Ambassador\Contracts;
 
 interface ValidationInterface
 {
-    public function doValidate(): bool;
+    public function doValidate(array $payload): array;
 }
