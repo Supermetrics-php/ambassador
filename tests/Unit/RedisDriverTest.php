@@ -13,8 +13,7 @@ class RedisDriverTest extends TestCase
     public function testIfConnectedCorrectly(): void
     {
         $redisDriver  = new RedisDriver();
-        $result = $redisDriver->client->ping();
 
-        $this->assertIsObject($result);
+        $this->assertTrue($redisDriver->connect());
     }
 }
