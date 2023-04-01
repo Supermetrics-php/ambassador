@@ -69,6 +69,9 @@ final class Ambassador
 
         $this->storageDriver->store($payload, EntityTypes::from($type)->value);
 
+        /**
+         * Old Cached data will be removed.
+         */
         $this->cache->flush($type);
 
         return $this->response(
@@ -87,6 +90,9 @@ final class Ambassador
      */
     public function fetchAll(string $type): array
     {
+        /**
+         * Data will be fetched from Redis (Cache layer) before executing a query.
+         */
         $result = $this->cache->fetchFromCache($type);
 
         if (!$result) {
