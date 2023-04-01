@@ -12,15 +12,15 @@ use Supermetrics\Ambassador\Contracts\DriverInterface;
 use Supermetrics\Ambassador\Exceptions\StorageDriverException;
 use Supermetrics\Ambassador\DataTransferObjects\ResponseDataTransferObject;
 
-class Ambassador
+final class Ambassador
 {
     use ResponsorTrait;
     protected DriverInterface $storageDriver;
 
     /**
-     * @throws StorageDriverException
+     * @throws StorageDriverException|Exceptions\ConnectionException
      */
-    public function __construct(string $driver, protected $validatorService = new Validator)
+    public function __construct(string $driver, protected $validatorService = new Validator())
     {
         $this->storageDriver = StorageBuilder::getDriverInstance($driver);
     }
