@@ -67,7 +67,7 @@ class RedisDriver implements DriverInterface, DriverConnectionInterface
         foreach ($result as $item) {
             $convertedResult[] = $redisRecordGenerator->jsonDecoder($item);
         }
-        
+
         return $convertedResult;
     }
 

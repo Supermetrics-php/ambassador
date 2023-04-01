@@ -31,6 +31,12 @@ class Cache
         return null;
     }
 
+    /**
+     * @param string $type
+     * @param array  $payload
+     *
+     * @return void
+     */
     public function saveIntoCache(string $type, array $payload): void
     {
         $this->client->select(1);
@@ -41,6 +47,11 @@ class Cache
         $this->client->expire($type, self::CACHE_TTL);
     }
 
+    /**
+     * @param string $type
+     *
+     * @return void
+     */
     public function flush(string $type): void
     {
         $this->client->select(1);

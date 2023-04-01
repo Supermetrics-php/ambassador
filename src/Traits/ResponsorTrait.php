@@ -19,7 +19,6 @@ trait ResponsorTrait
 
         if (isset($responseBody->errorMessages) && $responseBody->errorMessages->value !== null) {
             $response['message'] = $responseBody->errorMessages->value;
-
         }
 
         if ($responseBody->data !== null) {

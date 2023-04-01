@@ -2,7 +2,6 @@
 
 namespace Supermetrics\Ambassador;
 
-use Exception;
 use Supermetrics\Ambassador\Services\Cache;
 use Supermetrics\Ambassador\Enums\StatusCodes;
 use Supermetrics\Ambassador\Enums\EntityTypes;
