@@ -1,6 +1,7 @@
 <?php
 
 namespace Supermetrics\Ambassador\Services;
+
 use Supermetrics\Ambassador\Enums\EntityTypes;
 
 class Validator
@@ -16,6 +17,6 @@ class Validator
     {
         $validationClass = self::BASE_NAMESPACE . ucfirst($type->value);
 
-        return (new $validationClass)->doValidate($payload);
+        return (new $validationClass())->doValidate($payload);
     }
 }

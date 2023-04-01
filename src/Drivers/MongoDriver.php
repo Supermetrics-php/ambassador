@@ -1,6 +1,7 @@
 <?php
 
 namespace Supermetrics\Ambassador\Drivers;
+
 use Supermetrics\Ambassador\Contracts\DriverInterface;
 
 class MongoDriver implements DriverInterface

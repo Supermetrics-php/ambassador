@@ -1,6 +1,7 @@
 <?php
 
 namespace Supermetrics\Ambassador\Enums;
+
 use Supermetrics\Ambassador\Traits\EnumConverterTrait;
 
 enum EntityTypes: string

@@ -11,7 +11,8 @@ trait ResponsorTrait
      *
      * @return array
      */
-    public function response(ResponseDataTransferObject $responseBody): array {
+    public function response(ResponseDataTransferObject $responseBody): array
+    {
         $response = [
             'message' => $responseBody->errorMessages->value,
             'status' => $responseBody->statusCode->value,
