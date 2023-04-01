@@ -12,4 +12,5 @@ enum ResponseMessages: string
     case INVALID_DATA = 'Provided Data Is Invalid.';
     case STORAGE_CONNECTION_FAILED = 'Database Connection Failed.';
     case RECORD_NOT_FOUND = 'Record Not Found.';
+    case DATA_SUCCESSFULLY_IMPORTED = 'Data is successfully imported.';
 }

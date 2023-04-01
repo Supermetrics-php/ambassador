@@ -3,6 +3,7 @@
 namespace Supermetrics\Ambassador;
 
 use Exception;
+use Supermetrics\Ambassador\Services\Cache;
 use Supermetrics\Ambassador\Enums\StatusCodes;
 use Supermetrics\Ambassador\Enums\EntityTypes;
 use Supermetrics\Ambassador\Services\Validator;
@@ -17,6 +18,7 @@ final class Ambassador
 {
     use ResponsorTrait;
     protected DriverInterface $storageDriver;
+    protected Cache $cache;
 
     /**
      * @throws StorageDriverException|Exceptions\ConnectionException
@@ -24,6 +26,7 @@ final class Ambassador
     public function __construct(string $driver, protected $validatorService = new Validator())
     {
         $this->storageDriver = StorageBuilder::getDriverInstance($driver);
+        $this->cache = new Cache();
     }
 
     /**
@@ -66,7 +69,15 @@ final class Ambassador
 
         $this->storageDriver->store($payload, EntityTypes::from($type)->value);
 
-        return [];
+        $this->cache->flush($type);
+
+        return $this->response(
+            responseBody: new ResponseDataTransferObject(
+                statusCode: StatusCodes::SUCCESS,
+                errorMessages: ResponseMessages::DATA_SUCCESSFULLY_IMPORTED,
+                data: $payload
+            )
+        );
     }
 
     /**
@@ -76,7 +87,12 @@ final class Ambassador
      */
     public function fetchAll(string $type): array
     {
-        $result = $this->storageDriver->findAll($type);
+        $result = $this->cache->fetchFromCache($type);
+
+        if (!$result) {
+            $result = $this->storageDriver->findAll($type);
+            $this->cache->saveIntoCache($type, $result);
+        }
 
         return $this->response(
             responseBody: new ResponseDataTransferObject(
