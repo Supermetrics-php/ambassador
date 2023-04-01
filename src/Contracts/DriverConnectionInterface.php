@@ -4,5 +4,5 @@ namespace Supermetrics\Ambassador\Contracts;
 
 interface DriverConnectionInterface
 {
-    public function connect();
+    public function connect(): bool;
 }

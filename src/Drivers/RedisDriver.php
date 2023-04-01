@@ -2,17 +2,15 @@
 
 namespace Supermetrics\Ambassador\Drivers;
 
+use Exception;
 use Predis\Client;
 use Supermetrics\Ambassador\Contracts\DriverInterface;
 use Supermetrics\Ambassador\Contracts\DriverConnectionInterface;
+use Supermetrics\Ambassador\Exceptions\ConnectionException;
 
 class RedisDriver implements DriverInterface, DriverConnectionInterface
 {
     public Client $client;
-    public function __construct()
-    {
-        $this->client = new Client(config('database')['connections']['redis']);
-    }
     public function store()
     {
         // TODO: Implement store() method.
@@ -23,8 +21,15 @@ class RedisDriver implements DriverInterface, DriverConnectionInterface
         // TODO: Implement findById() method.
     }
 
-    public function connect()
+    public function connect(): bool
     {
-    var_dump($this->client->ping());
+        try {
+            $this->client = new Client(config('database')['connections']['redis']);
+            $this->client->ping();
+
+            return true;
+        } catch (Exception) {
+            return false;
+        }
     }
 }
