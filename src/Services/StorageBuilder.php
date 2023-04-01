@@ -8,6 +8,7 @@ use Supermetrics\Ambassador\Drivers\RedisDriver;
 use Supermetrics\Ambassador\Drivers\MySqlDriver;
 use Supermetrics\Ambassador\Enums\StorageDrivers;
 use Supermetrics\Ambassador\Contracts\DriverInterface;
+use Supermetrics\Ambassador\Exceptions\ConnectionException;
 use Supermetrics\Ambassador\Exceptions\StorageDriverException;
 
 class StorageBuilder
@@ -30,9 +31,13 @@ class StorageBuilder
 
     /**
      * @throws StorageDriverException
+     * @throws ConnectionException
      */
     public static function getDriverInstance(string $driverName): DriverInterface
     {
+        /**
+         * Provided Driver from client will be validated.
+         */
         if (!self::isDriverSupported($driverName)) {
             throw new StorageDriverException(ErrorMessages::INVALID_STORAGE->value);
         }
@@ -41,8 +46,23 @@ class StorageBuilder
             self::$dbInstance = self::getDriver($driverName);
         }
 
+        $isConnected = self::$dbInstance->connect();
+
+        /**
+         * If Connection failed. Exception will be thrown.
+         */
+        if (!$isConnected) {
+            throw new ConnectionException(ErrorMessages::STORAGE_CONNECTION_FAILED->value);
+        }
+
         return self::$dbInstance;
     }
+
+    /**
+     * @param string $driverName
+     *
+     * @return DriverInterface
+     */
     public static function getDriver(string $driverName): DriverInterface
     {
         return match ($driverName) {
@@ -52,6 +72,11 @@ class StorageBuilder
         };
     }
 
+    /**
+     * @param string $driverName
+     *
+     * @return bool
+     */
     private static function isDriverSupported(string $driverName): bool
     {
         return in_array($driverName, StorageDrivers::getAllValues(), true);
