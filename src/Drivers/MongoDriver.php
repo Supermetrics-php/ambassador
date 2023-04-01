@@ -7,14 +7,21 @@ use Supermetrics\Ambassador\Contracts\DriverConnectionInterface;
 
 class MongoDriver implements DriverInterface, DriverConnectionInterface
 {
-    public function store()
+    public function store(array $payload, string $entityType): void
     {
         // TODO: Implement store() method.
     }
 
-    public function findById()
+    public function findAll(string $entityType): array
+    {
+        // TODO: Implement findAll() method.
+        return [];
+    }
+
+    public function findById(string $id, string $entityType): array
     {
         // TODO: Implement findById() method.
+        return [];
     }
 
     public function connect(): bool

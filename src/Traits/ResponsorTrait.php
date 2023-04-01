@@ -14,9 +14,13 @@ trait ResponsorTrait
     protected function response(ResponseDataTransferObject $responseBody): array
     {
         $response = [
-            'message' => $responseBody->errorMessages->value,
             'status' => $responseBody->statusCode->value,
         ];
+
+        if (isset($responseBody->errorMessages) && $responseBody->errorMessages->value !== null) {
+            $response['message'] = $responseBody->errorMessages->value;
+
+        }
 
         if ($responseBody->data !== null) {
             $response['body'] = $responseBody->data;

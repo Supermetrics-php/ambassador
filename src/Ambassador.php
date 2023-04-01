@@ -2,10 +2,11 @@
 
 namespace Supermetrics\Ambassador;
 
+use Exception;
 use Supermetrics\Ambassador\Enums\StatusCodes;
 use Supermetrics\Ambassador\Enums\EntityTypes;
 use Supermetrics\Ambassador\Services\Validator;
-use Supermetrics\Ambassador\Enums\ErrorMessages;
+use Supermetrics\Ambassador\Enums\ResponseMessages;
 use Supermetrics\Ambassador\Traits\ResponsorTrait;
 use Supermetrics\Ambassador\Services\StorageBuilder;
 use Supermetrics\Ambassador\Contracts\DriverInterface;
@@ -41,7 +42,7 @@ final class Ambassador
             return $this->response(
                 responseBody: new ResponseDataTransferObject(
                     statusCode: StatusCodes::INVALID_REQUEST,
-                    errorMessages: ErrorMessages::INVALID_ENTITY_TYPE,
+                    errorMessages: ResponseMessages::INVALID_ENTITY_TYPE,
                     data: null
                 )
             );
@@ -57,12 +58,74 @@ final class Ambassador
             return $this->response(
                 responseBody: new ResponseDataTransferObject(
                     statusCode: StatusCodes::INVALID_REQUEST,
-                    errorMessages: ErrorMessages::INVALID_DATA,
+                    errorMessages: ResponseMessages::INVALID_DATA,
                     data: $hasErrorOnValidation
                 )
             );
         }
 
+        $this->storageDriver->store($payload, EntityTypes::from($type)->value);
+
         return [];
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return array
+     */
+    public function fetchAll(string $type): array
+    {
+        $result = $this->storageDriver->findAll($type);
+
+        return $this->response(
+            responseBody: new ResponseDataTransferObject(
+                statusCode: StatusCodes::SUCCESS,
+                errorMessages: null,
+                data: $result
+            )
+        );
+    }
+
+    /**
+     * @param string $type
+     * @param string $id
+     *
+     * @return array
+     */
+    public function fetchById(string $type, string $id): array
+    {
+        /**
+         * Given type will be validated.
+         * Only "users" can be accepted.
+         */
+        if (!in_array($type, EntityTypes::getAllValues(), true)) {
+            return $this->response(
+                responseBody: new ResponseDataTransferObject(
+                    statusCode: StatusCodes::INVALID_REQUEST,
+                    errorMessages: ResponseMessages::INVALID_ENTITY_TYPE,
+                    data: null
+                )
+            );
+        }
+
+        $result = $this->storageDriver->findById($id, $type);
+        if (count($result) > 1) {
+            return $this->response(
+                responseBody: new ResponseDataTransferObject(
+                    statusCode: StatusCodes::SUCCESS,
+                    errorMessages: null,
+                    data: $result
+                )
+            );
+        }
+
+        return $this->response(
+            responseBody: new ResponseDataTransferObject(
+                statusCode: StatusCodes::NOT_FOUND,
+                errorMessages: ResponseMessages::RECORD_NOT_FOUND,
+                data: null
+            )
+        );
     }
 }
