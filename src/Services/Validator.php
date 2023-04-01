@@ -12,6 +12,9 @@ class Validator
      * @param array       $payload
      *
      * @return array
+     * Idea: Always code over a convention. Therefore, class names inside
+     * Rules MUST be exactly EntityTypes Names.
+     * For instance, Users.php
      */
     public function handle(EntityTypes $type, array $payload): array
     {
