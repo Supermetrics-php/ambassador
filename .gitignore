@@ -3,3 +3,4 @@
 .php-cs-fixer.php
 .phpunit.result.cache
 .idea
+.env
