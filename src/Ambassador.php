@@ -6,7 +6,7 @@ use Supermetrics\Ambassador\Services\Cache;
 use Supermetrics\Ambassador\Enums\StatusCodes;
 use Supermetrics\Ambassador\Enums\EntityTypes;
 use Supermetrics\Ambassador\Services\Validator;
-use Supermetrics\Ambassador\Enums\ResponseMessages;
+use Supermetrics\Ambassador\Enums\Messages;
 use Supermetrics\Ambassador\Traits\ResponsorTrait;
 use Supermetrics\Ambassador\Services\StorageBuilder;
 use Supermetrics\Ambassador\Contracts\DriverInterface;
@@ -44,7 +44,7 @@ final class Ambassador
             return $this->response(
                 responseBody: new ResponseDataTransferObject(
                     statusCode: StatusCodes::INVALID_REQUEST,
-                    errorMessages: ResponseMessages::INVALID_ENTITY_TYPE,
+                    errorMessages: Messages::INVALID_ENTITY_TYPE,
                     data: null
                 )
             );
@@ -60,7 +60,7 @@ final class Ambassador
             return $this->response(
                 responseBody: new ResponseDataTransferObject(
                     statusCode: StatusCodes::INVALID_REQUEST,
-                    errorMessages: ResponseMessages::INVALID_DATA,
+                    errorMessages: Messages::INVALID_DATA,
                     data: $hasErrorOnValidation
                 )
             );
@@ -76,7 +76,7 @@ final class Ambassador
         return $this->response(
             responseBody: new ResponseDataTransferObject(
                 statusCode: StatusCodes::SUCCESS,
-                errorMessages: ResponseMessages::DATA_SUCCESSFULLY_IMPORTED,
+                errorMessages: Messages::DATA_SUCCESSFULLY_IMPORTED,
                 data: $payload
             )
         );
@@ -124,14 +124,14 @@ final class Ambassador
             return $this->response(
                 responseBody: new ResponseDataTransferObject(
                     statusCode: StatusCodes::INVALID_REQUEST,
-                    errorMessages: ResponseMessages::INVALID_ENTITY_TYPE,
+                    errorMessages: Messages::INVALID_ENTITY_TYPE,
                     data: null
                 )
             );
         }
 
         $result = $this->storageDriver->findById($id, $type);
-        if (count($result) > 1) {
+        if (count($result) >= 1) {
             return $this->response(
                 responseBody: new ResponseDataTransferObject(
                     statusCode: StatusCodes::SUCCESS,
@@ -144,7 +144,7 @@ final class Ambassador
         return $this->response(
             responseBody: new ResponseDataTransferObject(
                 statusCode: StatusCodes::NOT_FOUND,
-                errorMessages: ResponseMessages::RECORD_NOT_FOUND,
+                errorMessages: Messages::RECORD_NOT_FOUND,
                 data: null
             )
         );

@@ -4,7 +4,7 @@ namespace Supermetrics\Ambassador\Enums;
 
 use Supermetrics\Ambassador\Traits\EnumConverterTrait;
 
-enum ResponseMessages: string
+enum Messages: string
 {
     use EnumConverterTrait;
     case INVALID_STORAGE = 'Invalid Storage.';

@@ -2,7 +2,7 @@
 
 namespace Supermetrics\Ambassador\Services;
 
-use Supermetrics\Ambassador\Enums\ResponseMessages;
+use Supermetrics\Ambassador\Enums\Messages;
 use Supermetrics\Ambassador\Drivers\MongoDriver;
 use Supermetrics\Ambassador\Drivers\RedisDriver;
 use Supermetrics\Ambassador\Drivers\FileDriver;
@@ -39,7 +39,7 @@ class StorageBuilder
          * Provided Driver from client will be validated.
          */
         if (!self::isDriverSupported($driverName)) {
-            throw new StorageDriverException(ResponseMessages::INVALID_STORAGE->value);
+            throw new StorageDriverException(Messages::INVALID_STORAGE->value);
         }
 
         if (self::$dbInstance === null) {
@@ -52,7 +52,7 @@ class StorageBuilder
          * If Connection failed. Exception will be thrown.
          */
         if (!$isConnected) {
-            throw new ConnectionException(ResponseMessages::STORAGE_CONNECTION_FAILED->value);
+            throw new ConnectionException(Messages::STORAGE_CONNECTION_FAILED->value);
         }
 
         return self::$dbInstance;
