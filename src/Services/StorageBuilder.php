@@ -11,7 +11,7 @@ use Supermetrics\Ambassador\Contracts\DriverInterface;
 use Supermetrics\Ambassador\Exceptions\ConnectionException;
 use Supermetrics\Ambassador\Exceptions\StorageDriverException;
 
-class StorageBuilder
+final class StorageBuilder
 {
     protected static $dbInstance;
 

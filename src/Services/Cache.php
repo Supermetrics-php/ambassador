@@ -4,7 +4,7 @@ namespace Supermetrics\Ambassador\Services;
 
 use Predis\Client;
 
-class Cache
+final class Cache
 {
     public Client $client;
     public function __construct()

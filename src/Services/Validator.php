@@ -4,7 +4,7 @@ namespace Supermetrics\Ambassador\Services;
 
 use Supermetrics\Ambassador\Enums\EntityTypes;
 
-class Validator
+final class Validator
 {
     private const BASE_NAMESPACE = "Supermetrics\Ambassador\Rules\\";
     /**
