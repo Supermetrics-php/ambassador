@@ -38,7 +38,15 @@ return [
             'production' => [
                 //  Cluster Info (Minio, AWS Object Storage, ...)
             ]
-        ]
+        ],
+        'mysql' => [
+            'host' => $_ENV['MYSQL_DB_HOST'],
+            'port' => $_ENV['MYSQL_DB_PORT'],
+            'database' => $_ENV['MYSQL_DB_DATABASE'],
+            'username' => $_ENV['MYSQL_DB_USERNAME'],
+            'password' => $_ENV['MYSQL_DB_PASSWORD'],
+            'charset' => 'utf8mb4'
+        ],
     ],
     'cache' => [
         'redis' => [
