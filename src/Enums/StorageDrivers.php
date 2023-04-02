@@ -10,4 +10,5 @@ enum StorageDrivers: string
     case REDIS = 'redis';
     case MONGO = 'mongo';
     case FILE = 'file';
+    case MYSQL = 'mysql';
 }

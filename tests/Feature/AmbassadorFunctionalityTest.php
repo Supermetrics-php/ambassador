@@ -8,6 +8,38 @@ use Supermetrics\Ambassador\Enums\StatusCodes;
 
 class AmbassadorFunctionalityTest extends TestCase
 {
+    public function testIfDataCanBePersistedInMySql(): void
+    {
+        $ambassador = new Ambassador('mysql');
+
+        $result = $ambassador->persist('users', [
+            ['id' => '60bb0ca5-25d1-43bd-98e5-6a878c00a0d8', 'name' => 'farshid'],
+            ['id' => '60bb0ca5-25d1-43bd-98e5-6a878c00a0d9', 'name' => 'mary']
+        ]);
+
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('status', $result, StatusCodes::SUCCESS->value);
+    }
+
+    public function testIfAllDataCanBeFetchedFromMySql(): void
+    {
+        $ambassador = new Ambassador('mysql');
+
+        $result = $ambassador->fetchAll('users');
+
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('status', $result, StatusCodes::SUCCESS->value);
+    }
+
+    public function testIfSpecificDataCanBeFetchedFromMySql(): void
+    {
+        $ambassador = new Ambassador('mysql');
+
+        $result = $ambassador->fetchById('users', '60bb0ca5-25d1-43bd-98e5-6a878c00a0d8');
+
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('status', $result, StatusCodes::SUCCESS->value);
+    }
     public function testIfDataCanBePersistedInRedis(): void
     {
         $ambassador = new Ambassador('redis');

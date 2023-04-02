@@ -6,6 +6,7 @@ use Supermetrics\Ambassador\Enums\Messages;
 use Supermetrics\Ambassador\Drivers\MongoDriver;
 use Supermetrics\Ambassador\Drivers\RedisDriver;
 use Supermetrics\Ambassador\Drivers\FileDriver;
+use Supermetrics\Ambassador\Drivers\MysqlDriver;
 use Supermetrics\Ambassador\Enums\StorageDrivers;
 use Supermetrics\Ambassador\Contracts\DriverInterface;
 use Supermetrics\Ambassador\Exceptions\ConnectionException;
@@ -68,6 +69,7 @@ final class StorageBuilder
         return match ($driverName) {
             StorageDrivers::FILE->value => new FileDriver(),
             StorageDrivers::MONGO->value => new MongoDriver(),
+            StorageDrivers::MYSQL->value => new MysqlDriver(),
             default               => new RedisDriver(),
         };
     }

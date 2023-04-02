@@ -56,6 +56,8 @@ class RedisDriver implements DriverInterface, DriverConnectionInterface
     }
 
     /**
+     * @param string $entityType
+     *
      * @return array
      */
     public function findAll(string $entityType): array
