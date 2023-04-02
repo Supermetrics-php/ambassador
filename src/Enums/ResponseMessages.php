@@ -11,6 +11,7 @@ enum ResponseMessages: string
     case INVALID_ENTITY_TYPE = 'Invalid Entity Type.';
     case INVALID_DATA = 'Provided Data Is Invalid.';
     case STORAGE_CONNECTION_FAILED = 'Database Connection Failed.';
+    case FILE_IS_UNAVAILABLE = 'File is unavailable.';
     case RECORD_NOT_FOUND = 'Record Not Found.';
     case DATA_SUCCESSFULLY_IMPORTED = 'Data is successfully imported.';
 }
