@@ -33,6 +33,7 @@
     },
     "scripts": {
         "analyze": "./vendor/bin/phpstan analyse src tests",
-        "fixer": "./vendor/bin/php-cs-fixer fix src"
+        "fixer": "./vendor/bin/php-cs-fixer fix src",
+        "tests": "./vendor/bin/phpunit tests"
     }
 }
