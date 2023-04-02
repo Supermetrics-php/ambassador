@@ -5,7 +5,7 @@ namespace Supermetrics\Ambassador\Services;
 use Supermetrics\Ambassador\Enums\ResponseMessages;
 use Supermetrics\Ambassador\Drivers\MongoDriver;
 use Supermetrics\Ambassador\Drivers\RedisDriver;
-use Supermetrics\Ambassador\Drivers\MySqlDriver;
+use Supermetrics\Ambassador\Drivers\FileDriver;
 use Supermetrics\Ambassador\Enums\StorageDrivers;
 use Supermetrics\Ambassador\Contracts\DriverInterface;
 use Supermetrics\Ambassador\Exceptions\ConnectionException;
@@ -66,7 +66,7 @@ class StorageBuilder
     public static function getDriver(string $driverName): DriverInterface
     {
         return match ($driverName) {
-            StorageDrivers::MYSQL->value => new MySqlDriver(),
+            StorageDrivers::FILE->value => new FileDriver(),
             StorageDrivers::MONGO->value => new MongoDriver(),
             default               => new RedisDriver(),
         };

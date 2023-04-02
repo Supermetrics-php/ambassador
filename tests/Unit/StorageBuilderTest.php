@@ -12,7 +12,7 @@ class StorageBuilderTest extends TestCase
      */
     public function testIfDriverSupported(): void
     {
-        $validDriver = StorageDrivers::MYSQL->value;
+        $validDriver = StorageDrivers::REDIS->value;
         $this->assertContains($validDriver, StorageDrivers::getAllValues());
     }
 }
