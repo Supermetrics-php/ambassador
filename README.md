@@ -8,6 +8,7 @@ This is php package which can handle log into different Databases
 
 Clone the project
 
+***you need to ask for access***
 ```bash
   git clone git@github.com:Supermetrics-php/ambassador.git
 ```
@@ -37,7 +38,7 @@ available scripts
 ```
 
 
-## Ussage
+## Usage
 
 ```php
 require_once 'vendor/autoload.php';
