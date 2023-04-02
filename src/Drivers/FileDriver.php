@@ -8,6 +8,7 @@ use Supermetrics\Ambassador\Enums\Messages;
 use Supermetrics\Ambassador\Contracts\DriverInterface;
 use Supermetrics\Ambassador\Exceptions\FileReaderException;
 use Supermetrics\Ambassador\Contracts\DriverConnectionInterface;
+
 class FileDriver implements DriverInterface, DriverConnectionInterface
 {
     private const BASE_GENERATOR_NAMESPACE = 'Supermetrics\Ambassador\Generators\\';
