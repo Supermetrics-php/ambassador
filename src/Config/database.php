@@ -19,8 +19,6 @@ return [
     |
     */
 
-    'default' => 'redis',
-
     'connections' => [
         'redis' => [
             'default' => [
