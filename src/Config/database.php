@@ -26,24 +26,32 @@ return [
             'default' => [
                 'scheme' => 'tcp',
                 'ttl' => '-1',
-                'host' => getenv('REDIS_HOST', '127.0.0.1'),
-                'username' => getenv('REDIS_USERNAME'),
-                'password' => getenv('REDIS_PASSWORD'),
-                'port' => getenv('REDIS_PORT', '6379'),
-                'database' => getenv('REDIS_DB', '0'),
+                'host' => $_ENV['REDIS_HOST'],
+                'username' => $_ENV['REDIS_USERNAME'],
+                'password' => $_ENV['REDIS_PASSWORD'],
+                'port' => $_ENV['REDIS_PORT'],
+                'database' => $_ENV['REDIS_DB'],
             ],
         ],
+        'file' => [
+            'default' => [
+                'path' => $_ENV['FILE_PATH'],
+            ],
+            'production' => [
+                //  Cluster Info (Minio, AWS Object Storage, ...)
+            ]
+        ]
     ],
     'cache' => [
         'redis' => [
             'default' => [
                 'scheme' => 'tcp',
-                'ttl' => '10',
-                'host' => getenv('REDIS_HOST', '127.0.0.1'),
-                'username' => getenv('REDIS_USERNAME'),
-                'password' => getenv('REDIS_PASSWORD'),
-                'port' => getenv('REDIS_PORT', '6379'),
-                'database' => getenv('REDIS_CACHE_DB', '1'),
+                'ttl' => -1,
+                'host' => $_ENV['REDIS_HOST'],
+                'username' => $_ENV['REDIS_USERNAME'],
+                'password' => $_ENV['REDIS_PASSWORD'],
+                'port' => $_ENV['REDIS_PORT'],
+                'database' => $_ENV['REDIS_CACHE_DB'],
             ],
         ],
     ],
