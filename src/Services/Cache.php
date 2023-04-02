@@ -7,7 +7,6 @@ use Predis\Client;
 class Cache
 {
     public Client $client;
-    private const CACHE_TTL = 10; //Minutes
     public function __construct()
     {
         $this->client = new Client(config('database')['cache']['redis']);
@@ -44,7 +43,7 @@ class Cache
         $data = serialize($payload);
 
         $this->client->set($type, $data);
-        $this->client->expire($type, self::CACHE_TTL);
+        $this->client->expire($type, $this->getCacheTTL());
     }
 
     /**
@@ -57,5 +56,10 @@ class Cache
         $this->client->select(1);
 
         $this->client->del($type);
+    }
+
+    private function getCacheTTL(): int
+    {
+        return config('database')['cache']['redis']['default']['ttl'];
     }
 }
