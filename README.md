@@ -45,6 +45,7 @@ require_once 'vendor/autoload.php';
 
 use Supermetrics\Ambassador\Ambassador;
 
+//$ambassador = new Ambassador('mysql');
 //$ambassador = new Ambassador('file');
 $ambassador = new Ambassador('redis');
 
