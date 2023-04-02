@@ -19,6 +19,7 @@ class FileDriver implements DriverInterface, DriverConnectionInterface
      */
     public function connect(): bool
     {
+        // there would be a cluster and any other solution for production.
         return true;
     }
     public function findAll(string $entityType): array
