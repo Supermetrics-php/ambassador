@@ -40,4 +40,27 @@ class AmbassadorFunctionalityTest extends TestCase
         $this->assertIsArray($result);
         $this->assertArrayHasKey('status', $result, StatusCodes::SUCCESS->value);
     }
+
+    public function testIfDataCanBePersistedInAFile(): void
+    {
+        $ambassador = new Ambassador('file');
+
+        $result = $ambassador->persist('users', [
+            ['id' => '60bb0ca5-25d1-43bd-98e5-6a878c00a0d8', 'name' => 'farshid'],
+            ['id' => '60bb0ca5-25d1-43bd-98e5-6a878c00a0d9', 'name' => 'mary']
+        ]);
+
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('status', $result, StatusCodes::SUCCESS->value);
+    }
+
+    public function testIfSpecificDataCanBeFetchedFromAFile(): void
+    {
+        $ambassador = new Ambassador('file');
+
+        $result = $ambassador->fetchById('users', '60bb0ca5-25d1-43bd-98e5-6a878c00a0d8');
+
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('status', $result, StatusCodes::SUCCESS->value);
+    }
 }
